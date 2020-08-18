@@ -2,13 +2,13 @@
 
 Simple Kubernetes cluster playground set up using Azure VMs, CLI and bash. Note! You need to have init-master.sh and init-node.sh in the same folder from where you run the commands, together with you public ssh key.
 
-For more information, check the [blog article](https://building4.cloud/set-up-kubernetes-cluster-playground-with-azure-virtual-machines-and-cli.html).
+For more information, check my [blog post](https://building4.cloud/set-up-kubernetes-cluster-playground-with-azure-virtual-machines-and-cli.html).
 
 I have already setup vnet with two subnets (management-subnet and kubernetes-subnet). I'm using Jumpbox for connecting the cluster resources. Jumpbox is already provisioned to management-subnet. 
 
 Following script can be used to provision the VMs.
 
-´´´bash
+```bash
 RESOURCEGROUP=rg-kubernetes-test
 LOCATION=westeurope
 ADMINUSER=azureuser
@@ -23,13 +23,13 @@ az group create --name $RESOURCEGROUP --location $LOCATION
 az vm create --name master1 --resource-group $RESOURCEGROUP --location $LOCATION --admin-username $ADMINUSER --size $VM_SIZE --image UbuntuLTS --subnet $SUBNETID --public-ip-address "" --nsg "" --ssh-key-values ./id_rsa.pub --custom-data ./init-master.sh --no-wait
 az vm create --name node1 --resource-group $RESOURCEGROUP --location $LOCATION --admin-username $ADMINUSER --size $VM_SIZE --image UbuntuLTS --subnet $SUBNETID --public-ip-address "" --nsg "" --ssh-key-values ./id_rsa.pub --custom-data ./init-node.sh --no-wait
 az vm create --name node2 --resource-group $RESOURCEGROUP --location $LOCATION --admin-username $ADMINUSER --size $VM_SIZE --image UbuntuLTS --subnet $SUBNETID --public-ip-address "" --nsg "" --ssh-key-values ./id_rsa.pub --custom-data ./init-node.sh --no-wait
-´´´
+```
 
 Nodes will need to be joined to the cluster. You can create a new token by using ´´´kubeadm join´´´.
 
-´´´bash
+```bash
 ssh azureuser@ip-address-of-master
 kubeadm token create --print-join-command
-´´´
+```
 
-Then run the ´´´kubeadm join´´´ command which is outputted on both nodes. Have fun!
+Then run the `kubeadm join` command which is outputted on both nodes. Have fun!
