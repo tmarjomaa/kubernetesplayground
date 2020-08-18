@@ -1,6 +1,6 @@
 # kubernetesplayground
 
-Simple Kubernetes cluster playground set up using Azure VMs, CLI and bash.**Note!** You need to have init-master.sh and init-node.sh in the same folder from where you run the commands, together with you public ssh key.
+Simple Kubernetes cluster playground set up using Azure VMs, CLI and bash. **Note!** You need to have init-master.sh and init-node.sh in the same folder from where you run the commands, together with you public ssh key.
 
 For more information, check my [blog post](https://building4.cloud/set-up-kubernetes-cluster-playground-with-azure-virtual-machines-and-cli.html).
 
