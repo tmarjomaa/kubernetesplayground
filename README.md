@@ -33,3 +33,9 @@ kubeadm token create --print-join-command
 ```
 
 Then run the `kubeadm join` command which is outputted on both nodes. Have fun!
+
+And finally remember to remove the resource group to avoid unnecessary costs.
+
+```bash
+ az group delete --name rg-kubernetes-test --yes --no-wait
+```
